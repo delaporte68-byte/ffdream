@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>FFdreame — Documentation Complète</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600;700&display=swap');
+
+  :root {
+    --bg-dark: #0a0c10;
+    --bg-panel: #111520;
+    --bg-card: #161b27;
+    --bg-header: #0d1117;
+    --accent-gold: #c8a035;
+    --accent-cyan: #00d4ff;
+    --accent-purple: #8b5cf6;
+    --accent-red: #e84040;
+    --accent-green: #22c55e;
+    --accent-orange: #f97316;
+    --text-main: #d4dae6;
+    --text-muted: #6b7280;
+    --text-bright: #f0f4ff;
+    --border: #1e2535;
+    --border-accent: #2a3550;
+    --table-header: #0f1823;
+    --table-alt: #131928;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Exo 2', 'Segoe UI', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-size: 10.5pt;
+    line-height: 1.55;
+  }
+
+  /* ====== COVER PAGE ====== */
+  .cover {
+    page-break-after: always;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #070b14 0%, #0f1825 50%, #070b14 100%);
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,212,255,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(139,92,246,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 50% 10%, rgba(200,160,53,0.08) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  .cover-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .cover-logo {
+    font-size: 80pt;
+    font-weight: 700;
+    font-family: 'Rajdhani', sans-serif;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #f0cc70 40%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 18pt;
+    color: var(--accent-cyan);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-divider {
+    width: 300px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), var(--accent-cyan), transparent);
+    margin: 0 auto 50px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-desc {
+    font-size: 13pt;
+    color: var(--text-main);
+    max-width: 700px;
+    line-height: 1.8;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-badges {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .badge {
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.25);
+    border-radius: 4px;
+    padding: 8px 20px;
+    font-size: 9pt;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-cyan);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .badge.gold {
+    background: rgba(200,160,53,0.08);
+    border-color: rgba(200,160,53,0.25);
+    color: var(--accent-gold);
+  }
+
+  .badge.purple {
+    background: rgba(139,92,246,0.08);
+    border-color: rgba(139,92,246,0.25);
+    color: var(--accent-purple);
+  }
+
+  .cover-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: var(--text-muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+
+  /* ====== TOC ====== */
+  .toc-page {
+    page-break-after: always;
+    padding: 60px 50px;
+    background: var(--bg-dark);
+  }
+
+  .toc-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 28pt;
+    color: var(--accent-gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .toc-underline {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-gold), transparent);
+    margin-bottom: 40px;
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    padding: 5px 0;
+    border-bottom: 1px dotted var(--border-accent);
+  }
+
+  .toc-num {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-cyan);
+    font-size: 9pt;
+    min-width: 50px;
+  }
+
+  .toc-text {
+    flex: 1;
+    color: var(--text-main);
+    font-size: 10pt;
+    padding: 0 10px;
+  }
+
+  .toc-dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--border-accent);
+    margin: 0 10px;
+    min-width: 30px;
+  }
+
+  .toc-sub {
+    padding-left: 30px;
+    font-size: 9pt;
+    color: var(--text-muted);
+  }
+
+  /* ====== SECTIONS ====== */
+  .section {
+    page-break-before: always;
+    padding: 50px 50px 40px;
+    background: var(--bg-dark);
+  }
+
+  .section:first-of-type {
+    page-break-before: auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 35px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--border-accent);
+    position: relative;
+  }
+
+  .section-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 42pt;
+    font-weight: 700;
+    color: rgba(0,212,255,0.12);
+    line-height: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .section-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 24pt;
+    font-weight: 700;
+    color: var(--text-bright);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .section-accent {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 120px;
+    height: 2px;
+    background: var(--accent-cyan);
+  }
+
+  /* ====== SUBSECTIONS ====== */
+  h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16pt;
+    font-weight: 600;
+    color: var(--accent-gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 30px 0 15px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-gold);
+  }
+
+  h3 {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 12pt;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    letter-spacing: 1px;
+    margin: 22px 0 10px;
+  }
+
+  h3::before {
+    content: '▸ ';
+    opacity: 0.6;
+  }
+
+  h4 {
+    font-size: 10.5pt;
+    font-weight: 600;
+    color: var(--accent-purple);
+    margin: 15px 0 8px;
+  }
+
+  p {
+    margin-bottom: 10px;
+    color: var(--text-main);
+  }
+
+  /* ====== PANELS / CARDS ====== */
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-accent);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 15px 0;
+  }
+
+  .panel.gold {
+    border-left: 3px solid var(--accent-gold);
+    background: linear-gradient(135deg, rgba(200,160,53,0.05) 0%, var(--bg-panel) 100%);
+  }
+
+  .panel.cyan {
+    border-left: 3px solid var(--accent-cyan);
+    background: linear-gradient(135deg, rgba(0,212,255,0.04) 0%, var(--bg-panel) 100%);
+  }
+
+  .panel.purple {
+    border-left: 3px solid var(--accent-purple);
+    background: linear-gradient(135deg, rgba(139,92,246,0.04) 0%, var(--bg-panel) 100%);
+  }
+
+  .panel.red {
+    border-left: 3px solid var(--accent-red);
+    background: linear-gradient(135deg, rgba(232,64,64,0.04) 0%, var(--bg-panel) 100%);
+  }
+
+  .panel.green {
+    border-left: 3px solid var(--accent-green);
+    background: linear-gradient(135deg, rgba(34,197,94,0.04) 0%, var(--bg-panel) 100%);
+  }
+
+  .panel-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--text-bright);
+  }
+
+  /* ====== TABLES ====== */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+    font-size: 9.5pt;
+  }
+
+  thead tr {
+    background: var(--table-header);
+    border-bottom: 2px solid var(--accent-cyan);
+  }
+
+  thead th {
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+  }
+
+  tbody tr:nth-child(even) {
+    background: var(--table-alt);
+  }
+
+  tbody tr:hover {
+    background: rgba(0,212,255,0.04);
+  }
+
+  td {
+    padding: 9px 14px;
+    color: var(--text-main);
+    vertical-align: top;
+  }
+
+  td:first-child {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--accent-gold);
+    font-size: 9pt;
+  }
+
+  td.mono {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9pt;
+    color: var(--accent-cyan);
+  }
+
+  td.tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5pt;
+    color: var(--accent-purple);
+  }
+
+  /* ====== CODE BLOCKS ====== */
+  .code-block {
+    background: #080c12;
+    border: 1px solid var(--border-accent);
+    border-left: 3px solid var(--accent-purple);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5pt;
+    color: #a8b4c8;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.65;
+  }
+
+  .code-block .kw { color: #c792ea; }
+  .code-block .fn { color: #82aaff; }
+  .code-block .str { color: #c3e88d; }
+  .code-block .num { color: #f78c6c; }
+  .code-block .cmt { color: #546e7a; font-style: italic; }
+  .code-block .key { color: #00d4ff; }
+
+  code {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8.5pt;
+    background: rgba(139,92,246,0.1);
+    color: var(--accent-purple);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  /* ====== LISTS ====== */
+  ul, ol {
+    padding-left: 22px;
+    margin: 8px 0 12px;
+  }
+
+  li {
+    margin-bottom: 5px;
+    color: var(--text-main);
+  }
+
+  li::marker {
+    color: var(--accent-cyan);
+  }
+
+  ul.compact li {
+    margin-bottom: 2px;
+  }
+
+  /* ====== GRID LAYOUTS ====== */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 15px 0;
+  }
+
+  .grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 15px 0;
+  }
+
+  .stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-accent);
+    border-radius: 6px;
+    padding: 14px 18px;
+    text-align: center;
+  }
+
+  .stat-label {
+    font-size: 8pt;
+    color: var(--text-muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--accent-gold);
+  }
+
+  .stat-unit {
+    font-size: 8pt;
+    color: var(--text-muted);
+  }
+
+  /* ====== FORMULA BOX ====== */
+  .formula-box {
+    background: var(--bg-card);
+    border: 1px solid rgba(200,160,53,0.3);
+    border-radius: 6px;
+    padding: 14px 20px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .formula {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12pt;
+    color: var(--accent-gold);
+    letter-spacing: 2px;
+  }
+
+  .formula-label {
+    font-size: 8pt;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ====== HIGHLIGHT BOXES ====== */
+  .info-box {
+    background: rgba(0,212,255,0.06);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 9.5pt;
+    color: var(--text-main);
+  }
+
+  .warning-box {
+    background: rgba(249,115,22,0.06);
+    border: 1px solid rgba(249,115,22,0.25);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 9.5pt;
+    color: var(--text-main);
+  }
+
+  .warning-box::before {
+    content: '⚠ ';
+    color: var(--accent-orange);
+    font-weight: 700;
+  }
+
+  /* ====== TAG CHIPS ====== */
+  .chip {
+    display: inline-block;
+    background: rgba(0,212,255,0.08);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 8pt;
+    color: var(--accent-cyan);
+    margin: 2px;
+  }
+
+  .chip.gold {
+    background: rgba(200,160,53,0.08);
+    border-color: rgba(200,160,53,0.2);
+    color: var(--accent-gold);
+  }
+
+  .chip.purple {
+    background: rgba(139,92,246,0.1);
+    border-color: rgba(139,92,246,0.25);
+    color: var(--accent-purple);
+  }
+
+  .chip.red {
+    background: rgba(232,64,64,0.08);
+    border-color: rgba(232,64,64,0.2);
+    color: var(--accent-red);
+  }
+
+  .chip.green {
+    background: rgba(34,197,94,0.08);
+    border-color: rgba(34,197,94,0.2);
+    color: var(--accent-green);
+  }
+
+  /* ====== PAGE BREAK ====== */
+  .page-break { page-break-before: always; }
+
+  /* ====== FOOTER ====== */
+  @page {
+    margin: 15mm 15mm 20mm 15mm;
+    @bottom-center {
+      content: "FFdreame — Documentation Système v1.0 · " counter(page);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 8pt;
+      color: #3a4560;
+    }
+  }
+
+  /* ====== RESPONSIVE (for screen preview) ====== */
+  @media screen {
+    body { max-width: 960px; margin: 0 auto; }
+    .cover { min-height: 80vh; }
+  }
+
+  /* ====== MISC ====== */
+  strong { color: var(--text-bright); }
+  em { color: var(--accent-gold); font-style: normal; }
+  hr { border: none; border-top: 1px solid var(--border-accent); margin: 20px 0; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 15px 0;
+  }
+
+  .rang-badge {
+    display: inline-block;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 14pt;
+    margin-right: 8px;
+  }
+
+  .rang-F { background: rgba(107,114,128,0.3); color: #9ca3af; border: 1px solid #4b5563; }
+  .rang-D { background: rgba(0,212,255,0.1); color: var(--accent-cyan); border: 1px solid rgba(0,212,255,0.3); }
+  .rang-C { background: rgba(34,197,94,0.1); color: var(--accent-green); border: 1px solid rgba(34,197,94,0.3); }
+  .rang-B { background: rgba(200,160,53,0.15); color: var(--accent-gold); border: 1px solid rgba(200,160,53,0.4); }
+  .rang-A { background: rgba(249,115,22,0.12); color: var(--accent-orange); border: 1px solid rgba(249,115,22,0.35); }
+  .rang-S { background: rgba(139,92,246,0.15); color: var(--accent-purple); border: 1px solid rgba(139,92,246,0.4); }
+  .rang-SS { background: rgba(232,64,64,0.12); color: var(--accent-red); border: 1px solid rgba(232,64,64,0.35); font-size: 11pt; }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER ==================== -->
+<div class="cover">
+  <div class="cover-grid"></div>
+  <div class="cover-logo">FFdreame</div>
+  <div class="cover-subtitle">Foundry VTT · Système de Jeu</div>
+  <div class="cover-divider"></div>
+  <div class="cover-desc">
+    Documentation complète du système FFdreame — un JDR de combat anime / cyberpunk-fantasy pour Foundry VTT v13.<br>
+    Mécaniques de jeu, structures de données, guide du Game Master et référence technique.
+  </div>
+  <div class="cover-badges">
+    <div class="badge gold">Version 1.0.0</div>
+    <div class="badge">Foundry VTT v13</div>
+    <div class="badge purple">Combat Anime</div>
+    <div class="badge">Cyberpunk-Fantasy</div>
+    <div class="badge gold">Français</div>
+  </div>
+  <div class="cover-footer">CONFIDENTIEL — Usage Interne · 2026</div>
+</div>
+
+<!-- ==================== TOC ==================== -->
+<div class="toc-page">
+  <div class="toc-title">Table des Matières</div>
+  <div class="toc-underline"></div>
+
+  <div class="toc-item"><span class="toc-num">01</span><span class="toc-text">Vue d'ensemble du système</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Identité, types d'acteurs, types d'items, modules chargés</span></div>
+  <div class="toc-item"><span class="toc-num">02</span><span class="toc-text">Structure des données</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Acteur (character/cyberpunk), Item Technique, template.json</span></div>
+  <div class="toc-item"><span class="toc-num">03</span><span class="toc-text">Système de Rang et formule de dé</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Rangs F→SS, 1d100 inversé, critiques, malus Fatigue/Blessures</span></div>
+  <div class="toc-item"><span class="toc-num">04</span><span class="toc-text">Styles de techniques et formules de dégâts</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">21 styles — CAC, MG, Parfait, ATTA, ULTIM, CHM, AOE, MULTI, etc.</span></div>
+  <div class="toc-item"><span class="toc-num">05</span><span class="toc-text">19 types d'effets</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Soins, buffs, malus, DoT, stun, seuils critiques, etc.</span></div>
+  <div class="toc-item"><span class="toc-num">06</span><span class="toc-text">Système de Points d'Action (PA)</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Grands PA, Petits PA, consommation, restauration</span></div>
+  <div class="toc-item"><span class="toc-num">07</span><span class="toc-text">Système de Réactions</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Esquive, Défense, Marche — calcul réduction</span></div>
+  <div class="toc-item"><span class="toc-num">08</span><span class="toc-text">Tableaux de Combat (2 × 8 slots)</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Effets de tableau, conditions, drag-and-drop</span></div>
+  <div class="toc-item"><span class="toc-num">09</span><span class="toc-text">Jauge Burste</span></div>
+  <div class="toc-item"><span class="toc-num">10</span><span class="toc-text">Zones de Canalisation (MULTIS surSoi)</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">Toggle, effets persistants, API publique</span></div>
+  <div class="toc-item"><span class="toc-num">11</span><span class="toc-text">Autres systèmes de combat</span></div>
+  <div class="toc-item toc-sub"><span class="toc-num"></span><span class="toc-text">AOER, Multi-zones, Téléportation, Initiative, Token HUD, Combat Bar</span></div>
+  <div class="toc-item"><span class="toc-num">12</span><span class="toc-text">Méthodes clés de l'Acteur</span></div>
+  <div class="toc-item"><span class="toc-num">13</span><span class="toc-text">GM Tracker</span></div>
+  <div class="toc-item"><span class="toc-num">14</span><span class="toc-text">Feuilles d'Items</span></div>
+  <div class="toc-item"><span class="toc-num">15</span><span class="toc-text">Ce qui est possible / Extensibilité</span></div>
+</div>
+
+<!-- ==================== SECTION 1 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-title">Vue d'Ensemble du Système</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <div class="grid-3">
+    <div class="stat-card">
+      <div class="stat-label">Identifiant système</div>
+      <div class="stat-value" style="font-size:16pt;color:var(--accent-cyan)">ffdreame</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Version</div>
+      <div class="stat-value">1.0.0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Foundry VTT</div>
+      <div class="stat-value" style="font-size:16pt;color:var(--accent-purple)">v13</div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="margin-top:8px">
+    <div class="stat-card">
+      <div class="stat-label">Token primaire</div>
+      <div class="stat-value" style="font-size:15pt;color:var(--accent-red)">PV</div>
+      <div class="stat-unit">Points de Vie</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Token secondaire</div>
+      <div class="stat-value" style="font-size:15pt;color:var(--accent-purple)">PM</div>
+      <div class="stat-unit">Points de Magie</div>
+    </div>
+  </div>
+
+  <h2>Types d'Acteurs</h2>
+  <table>
+    <thead><tr>
+      <th>Type</th><th>Feuille de personnage</th><th>Description</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>character</td><td class="mono">FFdreameActorSheet</td><td>Fiche Fantasy — joueurs humains/elfes/guerriers</td></tr>
+      <tr><td>cyberpunk</td><td class="mono">FFdreameCyberpunkSheet</td><td>Fiche Cyberpunk — personnages tech/implants</td></tr>
+      <tr><td>npc</td><td class="mono">FFdreameNPCSheet</td><td>Fiche NPC / Monstre — contrôlée par le MJ</td></tr>
+      <tr><td>gm-tracker</td><td class="mono">FFdreameGMTrackerSheet</td><td>Centre de contrôle MJ — vue d'ensemble de tous les joueurs</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Types d'Items</h2>
+  <div style="margin-bottom:16px">
+    <span class="chip gold">technique</span>
+    <span class="chip">talent</span>
+    <span class="chip">posture</span>
+    <span class="chip">attaque</span>
+    <span class="chip">ultimate</span>
+    <span class="chip purple">equipement</span>
+  </div>
+  <p>Le type <strong>technique</strong> est le plus riche : il regroupe tous les styles d'attaque (corps à corps, magie, zones, soins, téléportation…) et concentre l'essentiel de la mécanique de jeu.</p>
+
+  <h2>Modules JS chargés</h2>
+  <div class="grid-2">
+    <div class="panel cyan">
+      <div class="panel-title">Au démarrage (init)</div>
+      <ul class="compact">
+        <li>FFdreameActorSheet / CyberpunkSheet / NPCSheet / GMTrackerSheet</li>
+        <li>FFdreameItemSheet</li>
+        <li>FFdreameTokenHUD</li>
+        <li>FFdreameActor / FFdreameItem (documents)</li>
+      </ul>
+    </div>
+    <div class="panel purple">
+      <div class="panel-title">Quand prêt (ready)</div>
+      <ul class="compact">
+        <li>FFdreameMovementBlocker</li>
+        <li>FFdreameCombatSystem</li>
+        <li>FFdreameInitiativeBar</li>
+        <li>FFdreameCombatBar</li>
+        <li>FFdreamePersistentZones</li>
+        <li>FFdreameZonesCanalisation</li>
+        <li>FFdreameAOER</li>
+        <li>FFdreameNotifications</li>
+        <li>FFdreameMovement (Drag Ruler si installé)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Grille et Déplacement</h2>
+  <div class="panel gold">
+    <p><strong>1 case = 1 mètre</strong> — Le canvas Foundry est calibré pour que chaque cellule de grille corresponde à 1 mètre en jeu. Le déplacement maximum d'un personnage est calculé comme : <strong>2 + valeur Athlétisme</strong> mètres par tour.</p>
+  </div>
+</div>
+
+<!-- ==================== SECTION 2 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-title">Structure des Données</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Acteur — Identité &amp; Compétences</h2>
+  <div class="code-block"><span class="cmt">// Identité</span>
+<span class="key">system.nom</span>                  <span class="cmt">// Nom du personnage</span>
+<span class="key">system.lv</span>                   <span class="cmt">// Niveau (entier)</span>
+<span class="key">system.rang</span>                 <span class="cmt">// Rang : F / D / C / B / A / S / SS</span>
+<span class="key">system.pointsCompetences</span>    <span class="cmt">// Points disponibles (15 par défaut)</span>
+<span class="key">system.pointsCompetencesCumulees</span>
+<span class="key">system.pointsAptitudesCumulees</span>
+
+<span class="cmt">// Compétences (12 valeurs 0–10)</span>
+<span class="key">system.physique</span>.force.value / endurance.value / athletisme.value
+<span class="key">system.dexterite</span>.furtivite.value / agilite.value / perception.value
+<span class="key">system.intelligence</span>.culture.value / magie.value / volonte.value
+<span class="key">system.charisme</span>.intimidation.value / psychologie.value / persuasion.value</div>
+
+  <h2>Acteur — Aptitudes</h2>
+  <table>
+    <thead><tr><th>Aptitude</th><th>Champs</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>attaque</td><td class="mono">.base / .investissement / .total</td><td>Score d'attaque physique</td></tr>
+      <tr><td>puissanceMagique</td><td class="mono">.base / .investissement / .total</td><td>Puissance des sorts</td></tr>
+      <tr><td>pv</td><td class="mono">.base / .investissement / .max / .value</td><td>Points de Vie</td></tr>
+      <tr><td>pm</td><td class="mono">.base / .investissement / .max / .value</td><td>Points de Magie</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Acteur — Talents (4 emplacements)</h2>
+  <div class="code-block"><span class="key">system.talents</span>.talent1 … talent4 : {
+  actif         <span class="cmt">// booléen — talent activé ou non</span>
+  nom           <span class="cmt">// Nom du talent</span>
+  description   <span class="cmt">// Description</span>
+  typebonus     <span class="cmt">// "de" (dé) ou "fixe"</span>
+  valeurbonus   <span class="cmt">// Valeur du bonus accordé</span>
+}</div>
+
+  <h2>Acteur — Combat</h2>
+  <div class="code-block"><span class="key">system.combat</span> : {
+  burste                      <span class="cmt">// 0 → 100</span>
+  initiativeBonus             <span class="cmt">// bool → initiative = 999 si true</span>
+  actionBlocked               <span class="cmt">// bool → actions bloquées (stun)</span>
+  deplacementGratuitUtilise   <span class="cmt">// bool → déplacement gratuit du tour utilisé</span>
+
+  fatigue  : { f1 … f9 }     <span class="cmt">// booléens (cases cochées = dégradation)</span>
+  blessures: { b1 … b9 }     <span class="cmt">// booléens</span>
+
+  actionPoints : {
+    grand1 : { petit1, petit2, disponible }
+    grand2 : { petit1, petit2, disponible }
+    grand3 : { petit1, petit2, disponible }
+  }
+
+  reactions : { esquive, defense, marche }  <span class="cmt">// booléens (utilisées ce tour)</span>
+
+  tableau1 : { actif, nom, slots: { slot1 … slot8 }, effet: { … } }
+  tableau2 : { actif, nom, slots: { slot1 … slot8 }, effet: { … } }
+
+  atouts : { atout1 … atout4 : { nom, description } }
+}</div>
+
+  <h2>Item Technique — Champs principaux</h2>
+  <div class="code-block"><span class="key">system.style</span>       <span class="cmt">// cac | mag | pui | atta | attm | ultim | multi | multis |</span>
+                  <span class="cmt">// aoer | cur | tp | aoe | chm | parade | absorbdeg | defense | ...</span>
+<span class="key">system.coutPM</span>      <span class="cmt">// Coût en Points de Magie</span>
+<span class="key">system.coutPA</span>      <span class="cmt">// "grand" ou "petit"</span>
+<span class="key">system.baseDegats</span>  <span class="cmt">// Dégâts de base (entier)</span>
+<span class="key">system.portee</span>      <span class="cmt">// Portée en mètres (défaut 1.5)</span>
+<span class="key">system.description</span>
+
+<span class="cmt">// Effets (2 effets par technique)</span>
+<span class="key">system.effet1</span> / <span class="key">system.effet2</span> : {
+  type      <span class="cmt">// soins | bufa | bufj | bufd | dot | stun | ... (19 types)</span>
+  valeur    <span class="cmt">// Valeur numérique</span>
+  unite     <span class="cmt">// "%" ou "fixe"</span>
+  condition <span class="cmt">// "toujours" | "critique" | ...</span>
+  duree     <span class="cmt">// Durée en rounds (0 = permanent)</span>
+}
+
+<span class="cmt">// Animations</span>
+<span class="key">system.animation</span> : {
+  jb2a          <span class="cmt">// Nom de l'animation JB2A</span>
+  sequencer     <span class="cmt">// Chemin Sequencer custom</span>
+  duree         <span class="cmt">// Durée en ms</span>
+  persistante   <span class="cmt">// bool → zone persistante</span>
+  degatsParTour <span class="cmt">// Dégâts par round si zone persistante</span>
+  dureeTours    <span class="cmt">// Rounds avant disparition</span>
+}
+
+<span class="cmt">// Multi-cibles</span>
+<span class="key">system.multi</span> : { type, distanceMax, largeur }
+<span class="key">system.aoer</span>  : { forme, distanceMax, taille, angle }
+
+<span class="cmt">// CHM — 5 variantes</span>
+<span class="key">system.chm</span>.slot1 … slot5 : {
+  icone, nom, style, baseDegats, description, effet1, effet2, animation
+}
+
+<span class="cmt">// Téléportation</span>
+<span class="key">system.teleportation</span> : { actif, type, distanceMax, position }
+
+<span class="cmt">// Canalisation</span>
+<span class="key">system.surSoi</span>         <span class="cmt">// bool → zone centrée sur le lanceur</span>
+<span class="key">system.canalisation</span>   <span class="cmt">// bool → mode toggle persistant</span>
+<span class="key">system.canalisationPM</span> <span class="cmt">// PM consommés par round</span></div>
+</div>
+
+<!-- ==================== SECTION 3 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-title">Système de Rang &amp; Formule de Dé</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Table des Rangs</h2>
+  <table>
+    <thead><tr>
+      <th>Rang</th><th>Seuil de réussite</th><th>Multiplicateur dégâts</th><th>Points cumulés</th><th>Couleur</th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="rang-badge rang-F">F</span></td>
+        <td>40</td><td>× 1.0</td><td>0</td>
+        <td><span class="chip">Débutant</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-D">D</span></td>
+        <td>45</td><td>× 1.0</td><td>+5</td>
+        <td><span class="chip">Apprenti</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-C">C</span></td>
+        <td>50</td><td>× 1.2</td><td>+5</td>
+        <td><span class="chip green">Confirmé</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-B">B</span></td>
+        <td>55</td><td>× 1.5</td><td>+10</td>
+        <td><span class="chip gold">Expérimenté</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-A">A</span></td>
+        <td>60</td><td>× 1.7</td><td>+5</td>
+        <td><span class="chip" style="color:var(--accent-orange);border-color:rgba(249,115,22,0.3);background:rgba(249,115,22,0.08)">Élite</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-S">S</span></td>
+        <td>60</td><td>× 2.0</td><td>+10</td>
+        <td><span class="chip purple">Héros</span></td>
+      </tr>
+      <tr>
+        <td><span class="rang-badge rang-SS">SS</span></td>
+        <td>65</td><td>× 2.0</td><td>+5</td>
+        <td><span class="chip red">Légende</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Formule de Jet de Dé</h2>
+  <div class="panel gold">
+    <div class="panel-title">Système 1d100 inversé</div>
+    <div class="formula-box">
+      <div class="formula">Résultat 1d100 ≤ (Seuil − Malus) = SUCCÈS</div>
+      <div class="formula-label">Plus le résultat est bas, mieux c'est</div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="panel red">
+      <div class="panel-title">Échec Critique</div>
+      <p>Jet ≥ 95 → Aucun dégât, notification rouge 💀</p>
+    </div>
+    <div class="panel green">
+      <div class="panel-title">Succès Critique</div>
+      <p>Jet ≤ 5 → Dégâts × 2, notification verte ⭐</p>
+    </div>
+  </div>
+
+  <h2>Malus Fatigue (f1–f9)</h2>
+  <table>
+    <thead><tr><th>Case</th><th>Effet</th></tr></thead>
+    <tbody>
+      <tr><td>f5</td><td>+5% sur le jet de dé (rend le succès plus difficile)</td></tr>
+      <tr><td>f4</td><td>Réduction % sur les aptitudes (attaque / PM)</td></tr>
+      <tr><td>f6</td><td>Réduction % sur les aptitudes</td></tr>
+      <tr><td>f7</td><td>Réduction % sur les aptitudes</td></tr>
+      <tr><td>f8</td><td>Perd la restauration du Grand PA 3 ce tour</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Malus Blessures (b1–b9)</h2>
+  <table>
+    <thead><tr><th>Case</th><th>Effet</th></tr></thead>
+    <tbody>
+      <tr><td>b1, b3, b5</td><td>+5% chacune sur le jet de dé</td></tr>
+      <tr><td>b4, b6</td><td>Réduction % sur les aptitudes</td></tr>
+      <tr><td>b7</td><td>−10% PV max par tour (appliqué automatiquement)</td></tr>
+      <tr><td>b8</td><td>−20% PV max par tour (cumulatif avec b7)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Initiative</h2>
+  <div class="panel cyan">
+    <ul>
+      <li>Formule par défaut : <code>1d100</code></li>
+      <li>Si <code>system.combat.initiativeBonus = true</code> → initiative fixée à <strong>999</strong> (toujours premier)</li>
+      <li>Configuration : <code>CONFIG.Combat.initiative = &#123; formula: "1d100", decimals: 0 &#125;</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SECTION 4 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-title">Styles de Techniques &amp; Formules</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Tableau des 21 Styles</h2>
+  <table>
+    <thead><tr>
+      <th>Style (code)</th><th>Formule dégâts</th><th>PA requis</th><th>Jet de dé</th><th>Notes</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>cac</td><td>ATQ + PM÷2 + base</td><td>1 Grand</td><td>Oui</td><td>Corps à Corps</td></tr>
+      <tr><td>mag</td><td>ATQ÷2 + PM + base</td><td>1 Grand</td><td>Oui</td><td>Magie Guidée</td></tr>
+      <tr><td>pui</td><td>ATQ + PM + base</td><td>1 Grand</td><td>Oui</td><td>Parfait — combiné ATQ+PM</td></tr>
+      <tr><td>eha</td><td>ATQ + base</td><td>1 Grand</td><td>Oui</td><td>Éclat de Haine (Attaque)</td></tr>
+      <tr><td>ehm</td><td>PM + base</td><td>1 Grand</td><td>Oui</td><td>Éclat de Haine (Magie)</td></tr>
+      <tr><td>ef</td><td>PM + ATQ÷2 + base</td><td>1 Grand</td><td>Oui</td><td>Éclat Foudre</td></tr>
+      <tr><td>atta</td><td>ATQ + base</td><td>1 Petit</td><td>Oui</td><td>Attaque rapide (physique)</td></tr>
+      <tr><td>attm</td><td>PM + base</td><td>1 Petit</td><td>Oui</td><td>Attaque rapide (magie)</td></tr>
+      <tr><td>ultim</td><td>base seulement</td><td>0 PA</td><td>Non</td><td>Consomme Burste 100 → 0</td></tr>
+      <tr><td>cur</td><td>Soins (PV)</td><td>1 Grand</td><td>Non</td><td>Guérison automatique</td></tr>
+      <tr><td>tp</td><td>—</td><td>1 Grand</td><td>Optionnel</td><td>Téléportation du lanceur/cible</td></tr>
+      <tr><td>parade</td><td>Contre-attaque</td><td>1 Grand</td><td>Oui</td><td>Riposte si l'ennemi rate son jet</td></tr>
+      <tr><td>chm</td><td>Selon variante choisie</td><td>Variable</td><td>Variable</td><td>Dialogue de choix parmi 5 options</td></tr>
+      <tr><td>aoe</td><td>3 jets séquentiels</td><td>1 Grand</td><td>60→50→40</td><td>3 seuils décroissants</td></tr>
+      <tr><td>aoer</td><td>Zone différée</td><td>1 Grand</td><td>Oui</td><td>Template sur canvas, déclenche au round suivant</td></tr>
+      <tr><td>multi</td><td>Zone instantanée</td><td>1 Grand</td><td>Oui</td><td>Prévisualisation PIXI canvas</td></tr>
+      <tr><td>multis</td><td>Zone persistante toggle</td><td>0 PA</td><td>Non</td><td>Si surSoi+canalisation → zone autour du lanceur</td></tr>
+      <tr><td>absorbdeg</td><td>Absorption</td><td>1 Grand</td><td>Oui</td><td>Absorbe une partie des dégâts reçus</td></tr>
+      <tr><td>defense</td><td>—</td><td>1 Grand</td><td>Non</td><td>Posture défensive</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Style CHM — 5 Variantes</h2>
+  <div class="panel purple">
+    <div class="panel-title">Choix Multiple (CHM)</div>
+    <p>Quand une technique de style <code>chm</code> est utilisée, un dialogue s'ouvre avec jusqu'à <strong>5 variantes</strong> (slots chm.slot1 à chm.slot5), chacune ayant son propre style, dégâts, effets et animations. Le joueur choisit quelle variante exécuter.</p>
+  </div>
+
+  <h2>Style AOE — 3 Jets Séquentiels</h2>
+  <div class="panel cyan">
+    <p>Le style <code>aoe</code> effectue <strong>3 jets de dé successifs</strong> contre 3 seuils décroissants :</p>
+    <div class="formula-box"><div class="formula">1er jet : seuil 60 → 2ème jet : seuil 50 → 3ème jet : seuil 40</div></div>
+    <p>Chaque succès inflige des dégâts. Les 3 impacts sont affichés dans le chat Foundry.</p>
+  </div>
+</div>
+
+<!-- ==================== SECTION 5 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-title">19 Types d'Effets</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <p>Chaque technique peut porter jusqu'à <strong>2 effets</strong>. Les zones de canalisation appliquent ces effets à <em>tous</em> les tokens présents dans la zone.</p>
+
+  <table>
+    <thead><tr>
+      <th>Type</th><th>Description</th><th>Déclenchement</th><th>Retrait</th>
+    </tr></thead>
+    <tbody>
+      <tr><td>soins</td><td>Soins de PV (% ou fixe) sur la cible</td><td>Immédiat</td><td>—</td></tr>
+      <tr><td>soisg</td><td>Soins de PV sur tout le groupe allié</td><td>Immédiat</td><td>—</td></tr>
+      <tr><td>bufa</td><td>Bonus aux dégâts d'attaque</td><td>Entrée zone / technique</td><td>Sortie zone / durée</td></tr>
+      <tr><td>bufj</td><td>Réduction du jet de dé (facilite les succès)</td><td>Flag posé sur l'acteur</td><td>Sortie zone / durée</td></tr>
+      <tr><td>bufd</td><td>Réduction des dégâts reçus (%)</td><td>Flag posé sur l'acteur</td><td>Sortie zone / durée</td></tr>
+      <tr><td>bufpa</td><td>PA temporaire supplémentaire (grand4)</td><td>Ajoute un 4ème Grand PA</td><td>Sortie zone / durée</td></tr>
+      <tr><td>malusjet</td><td>Malus sur le jet de dé de l'ennemi</td><td>Flag posé sur la cible</td><td>Sortie zone / durée</td></tr>
+      <tr><td>reducdegats</td><td>Réduit les dégâts que la cible inflige</td><td>Flag posé sur la cible</td><td>Sortie zone / durée</td></tr>
+      <tr><td>ponction</td><td>Vol de PV par round (% ou fixe)</td><td>Chaque round</td><td>Sortie zone</td></tr>
+      <tr><td>ponctionm</td><td>Vol de PM par round (% ou fixe)</td><td>Chaque round</td><td>Sortie zone</td></tr>
+      <tr><td>sc</td><td>Augmente le seuil de succès critique</td><td>Flag acteur</td><td>Sortie zone</td></tr>
+      <tr><td>ec</td><td>Réduit le seuil d'échec critique (fumble)</td><td>Flag acteur</td><td>Sortie zone</td></tr>
+      <tr><td>dot</td><td>Dégâts directs par round (Damage over Time)</td><td>Chaque round</td><td>Sortie zone</td></tr>
+      <tr><td>stun</td><td>Bloque toutes les actions (actionBlocked)</td><td>Immédiat</td><td>Sortie zone</td></tr>
+      <tr><td>opportuniste</td><td>Flag permettant une contre-attaque automatique</td><td>Flag acteur</td><td>Sortie zone</td></tr>
+      <tr><td>change_posture</td><td>Bascule entre tableau 1 et tableau 2</td><td>Immédiat</td><td>Sortie zone</td></tr>
+      <tr><td>btemp</td><td>PV temporaires (augmente le PV max temporairement)</td><td>+PV max temp.</td><td>Sortie zone</td></tr>
+      <tr><td>restaurePA</td><td>Restaure immédiatement tous les PA</td><td>Immédiat</td><td>—</td></tr>
+      <tr><td>push</td><td>Repousse la cible (mécanique de déplacement forcé)</td><td>Immédiat</td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <strong>Configuration des effets :</strong> Chaque effet possède 4 paramètres — <code>type</code>, <code>valeur</code> (nombre), <code>unite</code> ("%" ou "fixe"), <code>condition</code> ("toujours", "critique"…), <code>duree</code> (rounds, 0 = permanent).
+  </div>
+</div>
+
+<!-- ==================== SECTION 6 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-title">Système de Points d'Action (PA)</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Structure</h2>
+  <div class="panel gold">
+    <p><strong>3 Grands PA</strong> par personnage. Chaque Grand PA contient <strong>2 Petits PA</strong>. Un Grand PA est considéré "disponible" seulement si ses deux Petits PA sont encore disponibles.</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="stat-card">
+      <div class="stat-label">Grands PA</div>
+      <div class="stat-value">3</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Petits PA / Grand</div>
+      <div class="stat-value">2</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total Petits PA</div>
+      <div class="stat-value">6</div>
+    </div>
+  </div>
+
+  <h2>Consommation par Style</h2>
+  <table>
+    <thead><tr><th>Style</th><th>Coût</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>atta / attm</td><td>1 Petit PA</td><td>Attaques rapides</td></tr>
+      <tr><td>ultim</td><td>0 PA</td><td>Coût = Burste 100 → 0</td></tr>
+      <tr><td>Réaction (Esquive / Défense / Marche)</td><td>1 Petit PA</td><td>Hors tour du personnage</td></tr>
+      <tr><td>Basculer tableau T1↔T2</td><td>1 Petit PA</td><td>Seulement si en combat</td></tr>
+      <tr><td>parade</td><td>1 Grand PA</td><td>Riposte si ennemi rate</td></tr>
+      <tr><td>Tous les autres styles</td><td>1 Grand PA</td><td>Sauf si coutPA="petit" → 1 Petit PA</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Restauration</h2>
+  <ul>
+    <li><strong>Nouveau tour</strong> → restaure le premier Grand PA entièrement consommé</li>
+    <li><strong>f8 actif</strong> → bloque la restauration du Grand PA 3 ce tour</li>
+    <li><strong>GM Tracker</strong> → peut restaurer tous les PA de tous les joueurs manuellement</li>
+    <li><strong>Effet restaurePA</strong> → restaure instantanément tous les PA</li>
+  </ul>
+</div>
+
+<!-- ==================== SECTION 7 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">07</div>
+    <div class="section-title">Système de Réactions</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>3 Réactions disponibles</h2>
+  <table>
+    <thead><tr><th>Réaction</th><th>Compétence</th><th>Coût</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>Esquive 🤸</td><td>Agilité</td><td>1 Petit PA</td><td>Tentative d'éviter les dégâts</td></tr>
+      <tr><td>Défense 🛡️</td><td>Endurance</td><td>1 Petit PA</td><td>Bloc et réduction des dégâts</td></tr>
+      <tr><td>Marche 🚶</td><td>—</td><td>1 Petit PA</td><td>Mouvement réactif hors de portée</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Calcul de la Réduction (Esquive &amp; Défense)</h2>
+  <div class="panel cyan">
+    <div class="panel-title">Formule</div>
+    <div class="formula-box">
+      <div class="formula">Seuil = Jet attaquant + Compétence défenseur</div>
+      <div class="formula-label">1d100 vs seuil → Marge = Résultat − Seuil</div>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>Marge</th><th>Réduction des dégâts</th></tr></thead>
+    <tbody>
+      <tr><td>Marge &gt; 0</td><td>0% — Réaction ratée</td></tr>
+      <tr><td>Marge ≥ −15</td><td>40% des dégâts évités</td></tr>
+      <tr><td>Marge ≥ −25</td><td>50% des dégâts évités</td></tr>
+      <tr><td>Marge &lt; −25 ou critique (jet ≤ 5)</td><td>100% — Esquive/Défense parfaite</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">Les réactions sont réinitialisées à chaque nouveau tour (hook <code>combatRound</code> dans FFdreameCombatSystem). Chaque réaction ne peut être utilisée <strong>qu'une fois par tour</strong>.</div>
+</div>
+
+<!-- ==================== SECTION 8 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">08</div>
+    <div class="section-title">Tableaux de Combat (2 × 8 Slots)</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Structure</h2>
+  <div class="grid-2">
+    <div class="panel cyan">
+      <div class="panel-title">Tableau 1</div>
+      <ul class="compact">
+        <li>8 emplacements (slot1 → slot8)</li>
+        <li>Disposition pyramidale : 1 – 2 – 2 – 2 – 1</li>
+        <li>Nom configurable</li>
+        <li>1 effet de tableau associé</li>
+      </ul>
+    </div>
+    <div class="panel purple">
+      <div class="panel-title">Tableau 2</div>
+      <ul class="compact">
+        <li>Même structure que Tableau 1</li>
+        <li>Activé/désactivé en alternance</li>
+        <li>Coût : 1 Petit PA pour basculer (si en combat)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Fonctionnement</h2>
+  <ol>
+    <li>Glisser-déposer une technique/attaque/ultimate depuis l'inventaire vers un slot</li>
+    <li>En combat : cliquer un slot utilise l'item immédiatement</li>
+    <li>Un seul tableau actif à la fois (basculer coûte 1 Petit PA)</li>
+  </ol>
+
+  <h2>Effets de Tableau (configurés par le MJ)</h2>
+  <table>
+    <thead><tr><th>Effet</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>bonus_degats</td><td>Bonus % ou fixe aux dégâts infligés</td></tr>
+      <tr><td>bonus_reussite</td><td>Bonus au seuil de réussite sur les jets</td></tr>
+      <tr><td>reduction_malus</td><td>Réduit les malus Fatigue/Blessures</td></tr>
+      <tr><td>recuperation_pa</td><td>PA bonus accordé à chaque tour</td></tr>
+      <tr><td>parade_gratuite</td><td>Contre-attaque automatique sans coût PA</td></tr>
+      <tr><td>initiative_first</td><td>Initiative = 999 (toujours premier — une fois par combat)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Conditions de Déclenchement</h2>
+  <table>
+    <thead><tr><th>Condition</th><th>Déclenchement</th></tr></thead>
+    <tbody>
+      <tr><td>permanent</td><td>Toujours actif quand le tableau est sélectionné</td></tr>
+      <tr><td>reussites</td><td>Après N techniques réussies (compteur visible sur la fiche)</td></tr>
+      <tr><td>debut_combat</td><td>Appliqué automatiquement au début du combat</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SECTION 9 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">09</div>
+    <div class="section-title">Jauge Burste</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <div class="grid-3">
+    <div class="stat-card">
+      <div class="stat-label">Gain par réussite</div>
+      <div class="stat-value" style="color:var(--accent-orange)">+10</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Maximum</div>
+      <div class="stat-value">100</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Coût Ultimate</div>
+      <div class="stat-value" style="color:var(--accent-red)">100</div>
+    </div>
+  </div>
+
+  <div class="panel gold" style="margin-top:20px">
+    <div class="panel-title">Fonctionnement</div>
+    <ul>
+      <li>Chaque technique réussie donne <strong>+10 Burste</strong> (plafonné à 100)</li>
+      <li>Quand Burste atteint 100 → notification "🔥 ULTIMATE DISPONIBLE !"</li>
+      <li>Utiliser un style <code>ultim</code> → consomme les 100 Burste, dégâts maximum</li>
+      <li>Affiché : barre dans l'onglet Combat + barre latérale sur le Token HUD</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SECTION 10 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">10</div>
+    <div class="section-title">Zones de Canalisation</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Déclenchement</h2>
+  <div class="panel purple">
+    <p>Une technique déclenche une zone de canalisation si elle cumule <strong>3 conditions</strong> :</p>
+    <ul>
+      <li><code>system.style = "multis"</code></li>
+      <li><code>system.surSoi = true</code></li>
+      <li><code>system.canalisation = true</code></li>
+    </ul>
+    <p>Cliquer le slot en combat bascule la zone ON/OFF (<em>toggle</em>). Un token sélectionné sur le canvas est requis.</p>
+  </div>
+
+  <h2>Comportement</h2>
+  <ul>
+    <li>Zone <strong>circulaire</strong> centrée sur le token lanceur, rayon = <code>system.multi.largeur</code> mètres</li>
+    <li>Animation Sequencer <strong>persistante attachée au token</strong> — suit le lanceur si il se déplace</li>
+    <li>Détection d'entrée/sortie automatique via hook <code>updateToken</code></li>
+    <li>Tous les <strong>19 types d'effets</strong> peuvent être appliqués aux tokens dans la zone</li>
+    <li>Effets périodiques (dot, ponction, ponctionm) déclenchés à chaque round</li>
+    <li><code>canalisationPM</code> PM consommés par round — arrêt auto si PM insuffisant</li>
+    <li>Suppression du token lanceur → zone stoppée automatiquement</li>
+  </ul>
+
+  <h2>API Publique</h2>
+  <div class="code-block"><span class="cmt">// Vérifier si une zone est active pour un acteur</span>
+<span class="fn">FFdreameZonesCanalisation</span>.zoneActiveFor(acteur)   <span class="cmt">// → boolean</span>
+
+<span class="cmt">// Lire les buffs actifs (depuis les flags de l'acteur)</span>
+<span class="fn">FFdreameZonesCanalisation</span>.getBufD(acteur)          <span class="cmt">// → réduction dégâts reçus (%)</span>
+<span class="fn">FFdreameZonesCanalisation</span>.getBufA(acteur)          <span class="cmt">// → bonus attaque</span>
+<span class="fn">FFdreameZonesCanalisation</span>.getBufJ(acteur)          <span class="cmt">// → réduction jet de dé</span>
+<span class="fn">FFdreameZonesCanalisation</span>.getMalusJet(acteur)     <span class="cmt">// → malus jet ennemi</span>
+<span class="fn">FFdreameZonesCanalisation</span>.getDot(acteur)          <span class="cmt">// → dégâts par round</span>
+<span class="fn">FFdreameZonesCanalisation</span>.isStunParZone(acteur)   <span class="cmt">// → boolean stun</span>
+
+<span class="cmt">// Appliquer les réductions (utiliser dans le calcul des dégâts)</span>
+<span class="fn">FFdreameZonesCanalisation</span>.appliquerBufD(degatsRecus, acteur)    <span class="cmt">// → dégâts après réduction</span>
+<span class="fn">FFdreameZonesCanalisation</span>.appliquerBufJ(resultatJet, acteur)    <span class="cmt">// → jet après réduction</span>
+
+<span class="cmt">// Gestion manuelle</span>
+<span class="fn">FFdreameZonesCanalisation</span>.toggleZone(acteur, technique, tokenLanceur)
+<span class="fn">FFdreameZonesCanalisation</span>.creerZone(acteur, technique, tokenLanceur)
+<span class="fn">FFdreameZonesCanalisation</span>.arreterZone(acteur)</div>
+
+  <h2>Implémentation Technique</h2>
+  <div class="code-block"><span class="cmt">// Fichier : module/combat/zones-canalisation.js</span>
+
+<span class="kw">class</span> <span class="fn">FFdreameZonesCanalisation</span> {
+  <span class="kw">static</span> #zonesActives = <span class="kw">new</span> Map();   <span class="cmt">// actorId → données zone</span>
+
+  <span class="kw">static</span> <span class="fn">init</span>() {
+    Hooks.on(<span class="str">'updateToken'</span>, ...);      <span class="cmt">// détection entrée/sortie</span>
+    Hooks.on(<span class="str">'deleteToken'</span>, ...);      <span class="cmt">// nettoyage si lanceur supprimé</span>
+    Hooks.on(<span class="str">'combatRound'</span>, ...);      <span class="cmt">// effets périodiques + PM</span>
+    Hooks.on(<span class="str">'deleteCombat'</span>, ...);     <span class="cmt">// nettoyage fin de combat</span>
+  }
+}</div>
+</div>
+
+<!-- ==================== SECTION 11 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">11</div>
+    <div class="section-title">Autres Systèmes de Combat</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Zones Persistantes (FFdreamePersistentZones)</h2>
+  <div class="panel red">
+    <ul>
+      <li>Zones placées sur la map qui infligent des dégâts chaque round</li>
+      <li>Disparaissent après N rounds configurés (<code>animation.dureeTours</code>)</li>
+      <li>Déclenchées via <code>animation.persistante = true</code> sur une technique</li>
+    </ul>
+  </div>
+
+  <h2>Multi-zones (Style MULTI)</h2>
+  <div class="panel cyan">
+    <ul>
+      <li>AOE classique avec prévisualisation canvas (PIXI)</li>
+      <li>Types : cercle ou ligne</li>
+      <li>Validation de la distance max avant le lancer</li>
+      <li>Dégâts dégressifs : 1er token 100%, 2ème 80%, 3ème 60%…</li>
+    </ul>
+  </div>
+
+  <h2>AOER — Zone Différée</h2>
+  <div class="panel purple">
+    <ul>
+      <li>Marque une zone visuelle sur le terrain (template Foundry)</li>
+      <li>Se déclenche automatiquement au round suivant</li>
+      <li>Formes disponibles : cercle, ligne, triangle</li>
+      <li>Paramètres : <code>aoer.forme</code>, <code>aoer.distanceMax</code>, <code>aoer.taille</code>, <code>aoer.angle</code></li>
+    </ul>
+  </div>
+
+  <h2>Téléportation (FFdreameTeleportation)</h2>
+  <table>
+    <thead><tr><th>Type</th><th>Comportement</th></tr></thead>
+    <tbody>
+      <tr><td>lanceur</td><td>Déplace le personnage autour de la cible (positions : derrière, devant, gauche, droite)</td></tr>
+      <tr><td>cible</td><td>Le joueur clique pour choisir la destination de téléportation</td></tr>
+    </tbody>
+  </table>
+  <p>Validation automatique de la distance max (<code>teleportation.distanceMax</code>).</p>
+
+  <h2>Token HUD (FFdreameTokenHUD)</h2>
+  <div class="panel gold">
+    <ul>
+      <li><strong>Haut du token</strong> : Points d'action (PA dots) — cercles verts/rouges</li>
+      <li><strong>Gauche</strong> : Barre Burste (⚡ orange)</li>
+      <li><strong>Droite</strong> : Barre PM (mauve)</li>
+    </ul>
+  </div>
+
+  <h2>Barre de Combat (FFdreameCombatBar)</h2>
+  <div class="panel cyan">
+    <p>Barre fixe de <strong>960px</strong> en bas d'écran, visible uniquement en combat :</p>
+    <ul class="compact">
+      <li>Portrait du personnage actif</li>
+      <li>Bouton de ciblage</li>
+      <li>Bouton "Fin de Tour"</li>
+      <li>Affichage des PA (cliquables)</li>
+      <li>Boutons Tableau 1 / Tableau 2</li>
+      <li>Boutons Réactions (Esquive / Défense / Marche)</li>
+      <li>Techniques rapides (depuis les slots des tableaux)</li>
+    </ul>
+  </div>
+
+  <h2>Barre d'Initiative (FFdreameInitiativeBar)</h2>
+  <div class="panel purple">
+    <p>Barre horizontale en <strong>haut de l'écran</strong>, style Baldur's Gate 3 :</p>
+    <ul class="compact">
+      <li>Portraits des combattants dans l'ordre d'initiative</li>
+      <li>Mise en surbrillance du combattant actif</li>
+      <li>Clic → pan de la caméra vers le token correspondant</li>
+    </ul>
+  </div>
+
+  <h2>Notifications (FFdreameNotifications)</h2>
+  <div class="panel green">
+    <ul>
+      <li>Style "Baldur's Gate 3" — carrés colorés apparaissant en coin d'écran</li>
+      <li><strong>Succès critique</strong> : notification verte avec ⭐</li>
+      <li><strong>Échec critique</strong> : notification rouge avec 💀</li>
+      <li><strong>Tour d'un joueur</strong> : notification dédiée avec son nom</li>
+      <li><strong>ULTIMATE disponible</strong> : notification spéciale 🔥</li>
+    </ul>
+  </div>
+
+  <h2>Déplacement (FFdreameMovement + FFdreameMovementBlocker)</h2>
+  <div class="panel gold">
+    <div class="formula-box">
+      <div class="formula">Distance max = 2 + valeur Athlétisme (mètres)</div>
+    </div>
+    <ul>
+      <li>En combat : <strong>1 déplacement gratuit</strong> par tour</li>
+      <li>Réaction "Marche" = déplacement supplémentaire</li>
+      <li>Validation à <code>preUpdateToken</code> — empêche tout déplacement illégal</li>
+      <li>Si Athlétisme change → mise à jour automatique de la distance token</li>
+      <li>Drag Ruler intégré (si le module est installé)</li>
+    </ul>
+  </div>
+
+  <h2>Combat System (FFdreameCombatSystem)</h2>
+  <table>
+    <thead><tr><th>Moment</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Début de combat</td><td>Initialise tous les combattants (PA, réactions, déplacement)</td></tr>
+      <tr><td>Nouveau round</td><td>Restaure 1 Grand PA par personnage, réinitialise réactions et déplacement gratuit</td></tr>
+      <tr><td>Fin de combat</td><td>Nettoie tous les flags, zones de canalisation, effets temporaires</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SECTION 12 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">12</div>
+    <div class="section-title">Méthodes Clés de l'Acteur</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Classe FFdreameActor</h2>
+  <p>Fichier : <code>module/documents/actor.js</code></p>
+
+  <table>
+    <thead><tr><th>Méthode</th><th>Paramètres</th><th>Effet</th></tr></thead>
+    <tbody>
+      <tr><td>prepareData()</td><td>—</td><td>Recalcule toutes les stats (aptitudes, malus, PV/PM max)</td></tr>
+      <tr><td>rollCompetence(nom, valeur)</td><td>nom, valeur</td><td>Jet 1d100, affiche résultat dans le chat Foundry</td></tr>
+      <tr><td>lancerAttaqueBase(posture)</td><td>numéro posture</td><td>Jet d'attaque de base, +10 Burste si succès</td></tr>
+      <tr><td>lancerTechnique(technique, posture)</td><td>items</td><td>Jet + calcul dégâts selon style</td></tr>
+      <tr><td>lancerUltimate(posture)</td><td>item</td><td>Dégâts ultimate, Burste → 0</td></tr>
+      <tr><td>lancerTechniqueEmbedded(tech, posture)</td><td>items</td><td>3 jets EHa/EHm (seuils 60/50/40)</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Calcul Rang et Modificateurs</h2>
+  <div class="code-block"><span class="fn">_getRangModifier</span>(rang) {
+  <span class="cmt">// Retourne { seuil, multiplicateur } selon le rang</span>
+  F  → { seuil: 40, mult: 1.0 }
+  D  → { seuil: 45, mult: 1.0 }
+  C  → { seuil: 50, mult: 1.2 }
+  B  → { seuil: 55, mult: 1.5 }
+  A  → { seuil: 60, mult: 1.7 }
+  S  → { seuil: 60, mult: 2.0 }
+  SS → { seuil: 65, mult: 2.0 }
+}
+
+<span class="fn">_calculateFatigueMalus</span>() → <span class="num">+5</span> si f5 cochée
+<span class="fn">_calculateBlessureMalus</span>() → <span class="num">+5</span> par case (b1, b3, b5) cochée</div>
+
+  <h2>Hooks Globaux sur les Acteurs</h2>
+  <table>
+    <thead><tr><th>Hook</th><th>Déclencheur</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>updateActor</td><td>PV changent à 0</td><td>Ajoute icône 💀 sur le token</td></tr>
+      <tr><td>updateActor</td><td>PV remontent &gt; 0</td><td>Retire l'icône 💀 (résurrection)</td></tr>
+      <tr><td>updateActor</td><td>Acteur character/cyberpunk</td><td>Rafraîchit tous les GM Tracker ouverts</td></tr>
+      <tr><td>updateActor</td><td>Athlétisme change</td><td>Met à jour la distance de déplacement token</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ==================== SECTION 13 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">13</div>
+    <div class="section-title">GM Tracker</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <div class="info-box">
+    Le GM Tracker est un acteur de type <code>gm-tracker</code>. Il n'a pas de token sur le canvas, c'est un panneau de contrôle centralisé pour le Game Master.
+  </div>
+
+  <h2>Fonctionnalités</h2>
+  <div class="grid-2">
+    <div class="panel cyan">
+      <div class="panel-title">Supervision en temps réel</div>
+      <ul class="compact">
+        <li>Barres PV / PM / Burste de chaque joueur</li>
+        <li>Cases Fatigue (f1–f9) modifiables directement</li>
+        <li>Cases Blessures (b1–b9) modifiables directement</li>
+        <li>Auto-refresh quand n'importe quel acteur est modifié</li>
+      </ul>
+    </div>
+    <div class="panel gold">
+      <div class="panel-title">Contrôle du combat</div>
+      <ul class="compact">
+        <li>Contrôle PA individuel (reset, toggle petits PA)</li>
+        <li>Blocage/déblocage d'actions (stun) par joueur</li>
+        <li>Bouton "Nouveau Tour" → restaure PA pour tous</li>
+        <li>Mode dés : toggle Auto / Manuel</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Mode Dés Manuel</h2>
+  <div class="panel purple">
+    <p>Paramètre système : <code>ffdreame.manualDiceMode</code></p>
+    <ul>
+      <li><strong>Auto</strong> (défaut) → Foundry lance les dés automatiquement</li>
+      <li><strong>Manuel</strong> → Le MJ entre les résultats à la main dans une boîte de dialogue</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SECTION 14 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">14</div>
+    <div class="section-title">Feuilles d'Items</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>Technique — 9 Onglets de Configuration</h2>
+  <table>
+    <thead><tr><th>Onglet</th><th>Contenu</th></tr></thead>
+    <tbody>
+      <tr><td>⚙️ Base</td><td>Style, coût PM, coût PA, dégâts de base, portée, description</td></tr>
+      <tr><td>✨ Effets</td><td>Effet 1 + Effet 2 : 19 types, valeur, unité (% ou fixe), condition, durée</td></tr>
+      <tr><td>🎬 Animations</td><td>JB2A (bibliothèque complète), Sequencer custom, durée en ms</td></tr>
+      <tr><td>💥 Impact</td><td>Multi-cibles : type (zone/ligne), distance max, largeur; AOER : forme, taille, angle</td></tr>
+      <tr><td>🎯 CHM</td><td>5 variantes avec style/effets/animations propres (slots 1–5)</td></tr>
+      <tr><td>🚀 Téléportation</td><td>Actif/inactif, type (lanceur/cible), distance max, position</td></tr>
+      <tr><td>🔄 Canalisation</td><td>surSoi, canalisation, PM par round</td></tr>
+      <tr><td>Zone persistante</td><td>persistante, dégâts par tour, durée en rounds</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Animations JB2A disponibles (catégories)</h2>
+  <div style="margin:10px 0">
+    <span class="chip gold">Feu</span>
+    <span class="chip gold">Foudre</span>
+    <span class="chip">Glace</span>
+    <span class="chip">Magie arcanique</span>
+    <span class="chip purple">Ténèbres</span>
+    <span class="chip">Nature</span>
+    <span class="chip">Eau</span>
+    <span class="chip">Vent</span>
+    <span class="chip gold">Lumière</span>
+    <span class="chip green">Poison</span>
+    <span class="chip">Terre</span>
+    <span class="chip">Impacts</span>
+    <span class="chip">Projectiles</span>
+    <span class="chip red">Mêlée</span>
+    <span class="chip green">Soins</span>
+    <span class="chip">Buffs</span>
+    <span class="chip red">Débuffs</span>
+    <span class="chip purple">Téléportation</span>
+    <span class="chip purple">Contrôle mental</span>
+    <span class="chip">Invocations</span>
+    <span class="chip gold">Spéciaux</span>
+  </div>
+
+  <h2>Autres types d'items</h2>
+  <div class="grid-2">
+    <div class="panel cyan">
+      <div class="panel-title">Talent</div>
+      <ul class="compact">
+        <li>Description, bonus (dé ou fixe)</li>
+        <li>Actif / Inactif (toggle)</li>
+        <li>4 emplacements sur la fiche acteur</li>
+      </ul>
+    </div>
+    <div class="panel gold">
+      <div class="panel-title">Posture</div>
+      <ul class="compact">
+        <li>effetType (6 types)</li>
+        <li>effetValeur, effetCondition</li>
+        <li>8 slots de techniques associées</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SECTION 15 ==================== -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-num">15</div>
+    <div class="section-title">Ce qui est Possible / Extensibilité</div>
+    <div class="section-accent"></div>
+  </div>
+
+  <h2>En tant que Game Master</h2>
+  <div class="panel gold">
+    <ul>
+      <li>Configurer les <strong>effets de tableau</strong> (condition, seuil déclenchement, valeur bonus)</li>
+      <li>Basculer le <strong>mode dés auto/manuel</strong> depuis le GM Tracker</li>
+      <li>Contrôler <strong>PA, Fatigue, Blessures</strong> de tous les joueurs simultanément</li>
+      <li>Créer des techniques avec jusqu'à <strong>2 effets combinés</strong></li>
+      <li>Définir des <strong>zones AOE</strong> : instantanées (MULTI), différées (AOER), persistantes, de canalisation</li>
+      <li>Configurer jusqu'à <strong>5 variantes CHM</strong> par technique</li>
+      <li>Définir les animations JB2A / Sequencer par technique</li>
+      <li>Gérer les <strong>téléportations</strong> (type lanceur ou cible)</li>
+    </ul>
+  </div>
+
+  <h2>En tant que Développeur</h2>
+  <div class="two-col">
+    <div class="panel purple">
+      <div class="panel-title">Ajouter des Styles</div>
+      <p>Dans <code>actor-sheet.js</code>, méthode <code>_useTableTechnique()</code> — ajouter un nouveau <code>case</code> ou bloc <code>if</code> avec la logique de calcul.</p>
+    </div>
+    <div class="panel cyan">
+      <div class="panel-title">Ajouter des Effets</div>
+      <p>Dans <code>actor-sheet.js</code>, méthode <code>_appliquerEffet()</code> — ajouter le nouveau type dans le switch.</p>
+    </div>
+  </div>
+
+  <div class="two-col" style="margin-top:10px">
+    <div class="panel green">
+      <div class="panel-title">Nouveaux Acteurs</div>
+      <p>Enregistrer dans <code>ffdreame.js</code> via <code>Actors.registerSheet()</code>, ajouter dans <code>template.json</code> la structure de données.</p>
+    </div>
+    <div class="panel gold">
+      <div class="panel-title">Nouvelles Animations</div>
+      <p>Ajouter l'entrée dans le <code>&lt;select&gt;</code> du template <code>technique-sheet-v2.html</code>.</p>
+    </div>
+  </div>
+
+  <h2>Fichiers Critiques</h2>
+  <div class="warning-box">
+    Ces fichiers sont au cœur du système. Toute modification doit être faite avec précaution.
+  </div>
+  <table>
+    <thead><tr><th>Fichier</th><th>Rôle</th><th>Taille</th></tr></thead>
+    <tbody>
+      <tr><td>module/ffdreame.js</td><td>Point d'entrée global — imports, hooks, Handlebars helpers</td><td>413 lignes</td></tr>
+      <tr><td>module/documents/actor.js</td><td>Modèle de données acteur — calculs, jets de dé</td><td>~600 lignes</td></tr>
+      <tr><td>template.json</td><td>Structure par défaut de tous les acteurs et items</td><td>~400 lignes</td></tr>
+      <tr><td>module/sheets/actor-sheet.js</td><td>Cœur de la mécanique — 40+ handlers, tous les styles</td><td>4235 lignes</td></tr>
+      <tr><td>module/combat/zones-canalisation.js</td><td>Système zones persistantes multi-effets</td><td>~1167 lignes</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Architecture des Modules</h2>
+  <div class="code-block">module/
+  ffdreame.js                  <span class="cmt">← point d'entrée</span>
+  documents/
+    actor.js                   <span class="cmt">← FFdreameActor</span>
+    item.js                    <span class="cmt">← FFdreameItem</span>
+  sheets/
+    actor-sheet.js             <span class="cmt">← Fiche Fantasy (4235 lignes)</span>
+    cyberpunk-sheet.js         <span class="cmt">← Fiche Cyberpunk</span>
+    npc-sheet.js               <span class="cmt">← Fiche NPC/Monstre</span>
+    gm-tracker-sheet.js        <span class="cmt">← GM Tracker</span>
+    item-sheet.js              <span class="cmt">← Fiche Item (techniques, etc.)</span>
+  combat/
+    combat-system.js           <span class="cmt">← Init/Round/Fin combat</span>
+    zones-canalisation.js      <span class="cmt">← Zones MULTIS surSoi</span>
+    persistent-zones.js        <span class="cmt">← Zones persistantes</span>
+    aoer-system.js             <span class="cmt">← Zones différées</span>
+    teleportation-system.js    <span class="cmt">← Téléportation</span>
+    initiative-bar.js          <span class="cmt">← Barre d'initiative BG3</span>
+    reaction-system.js         <span class="cmt">← Esquive/Défense/Marche</span>
+    tableau-effets.js          <span class="cmt">← Effets de tableau</span>
+  helpers/
+    dice-helper.js             <span class="cmt">← Gestion dés auto/manuel</span>
+    movement.js                <span class="cmt">← Drag Ruler</span>
+    movement-blocker.js        <span class="cmt">← Validation déplacement</span>
+  canvas/
+    token-hud.js               <span class="cmt">← HUD tokens (PA/Burste/PM)</span>
+  ui/
+    combat-bar.js              <span class="cmt">← Barre combat bas d'écran</span>
+    notifications-bg3.js       <span class="cmt">← Notifications style BG3</span>
+  macros/
+    technique-macro.js         <span class="cmt">← Macros depuis techniques</span></div>
+
+</div>
+
+</body>
+</html>
