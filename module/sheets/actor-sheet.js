@@ -10,6 +10,14 @@ export class FFdreameActorSheet extends ActorSheet {
   /* ================================
      OPTIONS DE LA FEUILLE
      ================================ */
+  get template() {
+    const templates = {
+      "ff7": "systems/ffdreame/templates/actor/character-sheet-ff7.html",
+      "map": "systems/ffdreame/templates/actor/character-sheet.html"
+    };
+    return templates[this.actor.type] ?? "systems/ffdreame/templates/actor/character-sheet.html";
+  }
+
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["ffdreame", "sheet", "actor"],

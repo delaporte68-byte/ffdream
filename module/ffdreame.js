@@ -54,6 +54,20 @@ Hooks.once('init', async function() {
     label: "Fiche Fantasy"
   });
 
+  // Enregistrement de la feuille FF7
+  Actors.registerSheet("ffdreame", FFdreameActorSheet, {
+    types: ["ff7"],
+    makeDefault: true,
+    label: "Fiche FF7"
+  });
+
+  // Enregistrement de la feuille Map
+  Actors.registerSheet("ffdreame", FFdreameActorSheet, {
+    types: ["map"],
+    makeDefault: true,
+    label: "Fiche Map"
+  });
+
   // Enregistrement de la feuille Cyberpunk
   Actors.registerSheet("ffdreame", FFdreameCyberpunkSheet, {
     types: ["cyberpunk"],
